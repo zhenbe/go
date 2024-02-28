@@ -112,7 +112,7 @@ func (h *RotatingFileHandler) doRollover() {
 
 	if h.backupCount > 0 {
 		h.fd.Close()
-
+		os.Remove(fmt.Sprintf("%s.%d", h.fileName, h.backupCount))
 		for i := h.backupCount - 1; i > 0; i-- {
 			sfn := fmt.Sprintf("%s.%d", h.fileName, i)
 			dfn := fmt.Sprintf("%s.%d", h.fileName, i+1)
